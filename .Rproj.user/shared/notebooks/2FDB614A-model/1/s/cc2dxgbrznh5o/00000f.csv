@@ -1,0 +1,96 @@
+"0",""
+"0","## LAB 2"
+"0","from vetiver import VetiverModel, vetiver_pin_write, VetiverAPI"
+"2","/Users/danielcho/Palmer Penguin EDA/venv/lib/python3.8/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+"
+"0","from pins import board_folder"
+"0",""
+"0","# Create a VetiverModel instance"
+"0","v = VetiverModel(model, model_name=""penguin_weight_predictor"", prototype_data=df[['bill_length_mm', 'species', 'sex']])"
+"0",""
+"0","# Set up a board and write the model to it"
+"0","model_board = board_folder(""data/model"", allow_pickle_read=True)"
+"0","vetiver_pin_write(model_board, v)"
+"2","Model Cards provide a framework for transparent, responsible reporting. 
+ Use the vetiver `.qmd` Quarto template as a place to start, 
+ with vetiver.model_card()
+Writing pin:
+Name: 'penguin_weight_predictor'
+Version: 20240417T132919Z-ccb35
+"
+"0","# Create and run the API on a different port if 8080 is in use"
+"0","app = VetiverAPI(v, check_prototype=True)"
+"0","try:"
+"0","    app.run(port=8082)  # Change port number to avoid conflict"
+"0","except Exception as e:"
+"0","    print(f""Failed to start server: {e}"")"
+"0","    "
+"0","## LAB 3"
+"0","# Connect to DuckDB and perform operations"
+"0","con = duckdb.connect('my-db.duckdb')"
+"2","/Users/danielcho/Palmer Penguin EDA/venv/lib/python3.8/site-packages/vetiver/utils.py:18: UserWarning: You may be running from a notebook environment. Jupyter Notebooks are not considered stable environments for production code
+  warnings.warn(
+"
+"2","INFO:     Started server process [48099]
+"
+"2","INFO:     Waiting for application startup.
+"
+"2","INFO:     VetiverAPI starting...
+"
+"2","INFO:     Application startup complete.
+"
+"2","INFO:     Uvicorn running on http://127.0.0.1:8082 (Press CTRL+C to quit)
+"
+"2","INFO:     Shutting down
+"
+"2","INFO:     Waiting for application shutdown.
+"
+"2","INFO:     Application shutdown complete.
+"
+"2","INFO:     Finished server process [48099]
+"
+"2","Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+NameError: name 'duckdb' is not defined
+"
+"0","con.execute(""CREATE TABLE IF NOT EXISTS penguins AS SELECT * FROM load_penguins()"")"
+"2","Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+NameError: name 'con' is not defined
+"
+"0","df = con.execute(""SELECT * FROM penguins"").fetchdf().dropna()"
+"2","Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+NameError: name 'con' is not defined
+"
+"0","con.close()"
+"2","Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+NameError: name 'con' is not defined
+"
+"0","quit"
+"0","shiny::runApp()"
+"2","Registered S3 methods overwritten by 'htmltools':
+  method               from         
+  print.html           tools:rstudio
+  print.shiny.tag      tools:rstudio
+  print.shiny.tag.list tools:rstudio
+"
+"2","Loading required package: shiny
+"
+"1","The following package(s) will be installed:
+"
+"1","- shiny [1.8.1.1]
+"
+"1","These packages will be installed into ""~/Palmer Penguin EDA/renv/library/R-4.3/aarch64-apple-darwin20"".
+"
+"1","
+"
+"0","reticulate::repl_python()"
+"1","- Unrecognized response: please enter 'y' or 'n', or type Ctrl + C to cancel.
+"
+"1","
+Restarting R session...
+
+"

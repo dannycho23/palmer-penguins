@@ -1,0 +1,20 @@
+api_version: 1
+created: 20240416T222455Z
+description: A scikit-learn LinearRegression model
+file: penguin_weight_predictor.joblib
+file_size: 984
+pin_hash: ccb35feb0fde3eb2
+title: 'penguin_weight_predictor: a pinned LinearRegression object'
+type: joblib
+user:
+  user: {}
+  vetiver_meta:
+    prototype: '{"bill_length_mm":39.1,"species":"Adelie","sex":"male"}'
+    python_version:
+    - 3
+    - 8
+    - 9
+    - final
+    - 0
+    required_pkgs:
+    - scikit-learn

@@ -1,0 +1,15 @@
+{
+  "hash": "a57bf5a7cc3dab19bf137405b77b8817",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Palmer Penguin EDA\"\n---\n\n\nThis is a Quarto website.\n\nTo learn more about Quarto websites visit <https://quarto.org/docs/websites>.\n\n\n::: {.cell}\n\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

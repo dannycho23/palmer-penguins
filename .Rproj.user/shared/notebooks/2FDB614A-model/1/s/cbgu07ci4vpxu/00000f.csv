@@ -1,0 +1,14 @@
+"0","from vetiver import VetiverAPI"
+"0",""
+"0","app = VetiverAPI(v, check_prototype = True)"
+"2","Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+NameError: name 'v' is not defined
+"
+"0","app.run(port = 6867)"
+"2","Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+NameError: name 'app' is not defined
+"
+"0","## END OF LAB 2"
+"0",""
