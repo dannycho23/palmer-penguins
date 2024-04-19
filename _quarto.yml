@@ -8,11 +8,11 @@ website:
       - href: index.qmd
         text: Home
       - href: about.qmd
-      - text: About
+        text: About
       - href: eda.qmd
-      - text: EDA
+        text: EDA
       - href: model.qmd
-      - text: Model
+        text: Model
 
 format:
   html:
