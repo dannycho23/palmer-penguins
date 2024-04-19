@@ -7,9 +7,12 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
-      - eda.qmd
-      - model.qmd
+      - href: about.qmd
+      - text: About
+      - href: eda.qmd
+      - text: EDA
+      - href: model.qmd
+      - text: Model
 
 format:
   html:
