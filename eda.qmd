@@ -1,65 +1,51 @@
-```{r}
-install.packages("renv")
-renv::init()
-renv::status()
-```
+---
+title: "Exploratory Data Analysis"
+---
 
 ```{r}
-install.packages("tidyverse")
-library(tidyverse)
-
-install.packages("palmerpenguins")
 library(palmerpenguins)
-data(package = 'palmerpenguins')
+library(dplyr)
+library(dbplyr)
+library(ggplot2)
+library(DBI)
+library(duckdb)
+
+con <- DBI::dbConnect(duckdb::duckdb(), dbdir = "my-db.duckdb")
+df <- dplyr::tbl(con, "penguins")
 ```
 
 ```{r}
-# HANDLING MISSING VALUES
-sum(is.na(penguins)) #check for missing data
-penguins <- na.omit(penguins) #omit missing data from the original dataset
+df %>%
+  group_by(species, sex) %>%
+  summarise(
+    across(
+        ends_with("mm") | ends_with("g"),
+      \(x) mean(x, na.rm = TRUE)
+      )
+    ) %>%
+  dplyr::collect() %>%
+  knitr::kable()
 ```
 
 ```{r}
-# VISUALIZATION
-ggplot(penguins, aes(x = body_mass_g)) + 
+df %>%
+  ggplot(aes(x = bill_length_mm, y = body_mass_g, color = species)) +
+  geom_point() + 
+  geom_smooth(method = "lm")
+
+df %>%
+  ggplot(aes(x = body_mass_g)) + 
   geom_histogram(bins = 30, fill = "blue", color = "white")
 
-ggplot(penguins, aes(x = species, y = flipper_length_mm, fill = species)) + 
+df %>%
+  ggplot(aes(x = species, y = flipper_length_mm, fill = species)) + 
   geom_boxplot()
 
-ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) + 
+df %>%
+  ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = species)) + 
   geom_point()
 ```
 
 ```{r}
-# SUMMARY STATISTICS
-penguins %>% 
-  group_by(species) %>% 
-  summarise(across(c(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g), mean, na.rm = TRUE))
-```
-
-```{r}
-# CORRELATION ANALYSIS
-cor_penguins <- select(penguins, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g)
-cor(cor_penguins, use = "complete.obs")
-```
-
-```{r}
-## LAB 3
-
-con <- DBI::dbConnect(duckdb::duckdb(), dbdir = "my-db.duckdb")
-
-# Optionally check if the table exists and then decide to overwrite or append
-if (DBI::dbExistsTable(con, "penguins")) {
-    DBI::dbWriteTable(con, "penguins", palmerpenguins::penguins, overwrite = TRUE)
-} else {
-    DBI::dbWriteTable(con, "penguins", palmerpenguins::penguins)
-}
-
-DBI::dbDisconnect(con)
-
-```
-
-```{r}
-renv::snapshot()
+DBI::dbDisconnect(con, shutdown = TRUE)
 ```

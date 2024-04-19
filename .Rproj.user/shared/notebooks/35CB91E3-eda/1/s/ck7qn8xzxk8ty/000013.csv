@@ -1,3 +1,0 @@
-"0","# VISUALIZATION"
-"0","ggplot(penguins, aes(x = body_mass_g)) + "
-"0","  geom_histogram(bins = 30, fill = ""blue"", color = ""white"")"

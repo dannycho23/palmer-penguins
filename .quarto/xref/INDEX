@@ -7,5 +7,14 @@
   },
   "index.qmd": {
     "index.html": "fd3a10a5"
+  },
+  "model.qmd": {
+    "model.html": "f83e0dc6"
+  },
+  "eda1.qmd": {
+    "eda1.html": "9c23ffe4"
+  },
+  "model1.qmd": {
+    "model1.html": "07732caa"
   }
 }
